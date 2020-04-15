@@ -1,0 +1,9 @@
+name: thinking-reactivel-with-rxjs
+root: <%= Dir.pwd %>
+
+windows:
+  - frontend:
+      layout: main-vertical
+      panes:
+        - vim
+        - cd project && npm run dev

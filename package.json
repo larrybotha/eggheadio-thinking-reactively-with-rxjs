@@ -1,0 +1,29 @@
+{
+  "name": "eggheadio-thinking-reactively-with-rxjs",
+  "version": "1.0.0",
+  "description": "Notes and annotations from Egghead's Thinking Reactively with RxJS course: https://egghead.io/courses/thinking-reactively-with-rxjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/larrybotha/eggheadio-thinking-reactively-with-rxjs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/larrybotha/eggheadio-thinking-reactively-with-rxjs/issues"
+  },
+  "homepage": "https://github.com/larrybotha/eggheadio-thinking-reactively-with-rxjs#readme",
+  "dependencies": {
+    "rxjs": "^6.5.5"
+  },
+  "devDependencies": {
+    "doctoc": "^1.4.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.1.3",
+    "typescript": "^3.8.3"
+  }
+}
