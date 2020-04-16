@@ -8,6 +8,7 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
 
 - [2. Use reactive, RxJS based solutions for complex problems](#2-use-reactive-rxjs-based-solutions-for-complex-problems)
 - [3. Break down a requirement into small problems](#3-break-down-a-requirement-into-small-problems)
+- [4. Pipe events to numbers and maintain a running count using the scan operator](#4-pipe-events-to-numbers-and-maintain-a-running-count-using-the-scan-operator)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -40,3 +41,25 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
         - _start from 0_
         - _when an async task starts, increase the count by 1_
         - _when a task ends, decrease the count by 1_
+
+## 4. Pipe events to numbers and maintain a running count using the scan operator
+
+[https://egghead.io/lessons/rxjs-break-down-a-requirement-into-small-problems](https://egghead.io/lessons/rxjs-break-down-a-requirement-into-small-problems)
+
+[index.ts](src/04-pipe-events-to-numbers-and-maintain-a-running-count-using-the-scan-operator/streams/index.ts)
+
+- `mapTo` is an operator that maps every value to a constant
+- `merge` takes multiple streams and creates a new stream which emits events
+    from all streams
+- `scan` works like `[].reduce`:
+
+    ```javascript
+    import {Observable} from 'rxjs'
+    import {scan} from 'rxjs/operators'
+
+    const startValue = 0;
+    const xs$ = new Observable()
+    const reducedXs$ = xs$.pipe(
+      scan((acc, x) => acc + x, startingValue)
+    )
+    ```
