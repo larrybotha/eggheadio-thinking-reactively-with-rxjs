@@ -9,6 +9,7 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
 - [2. Use reactive, RxJS based solutions for complex problems](#2-use-reactive-rxjs-based-solutions-for-complex-problems)
 - [3. Break down a requirement into small problems](#3-break-down-a-requirement-into-small-problems)
 - [4. Pipe events to numbers and maintain a running count using the scan operator](#4-pipe-events-to-numbers-and-maintain-a-running-count-using-the-scan-operator)
+- [5. Create safe and predictable observable abstractions](#5-create-safe-and-predictable-observable-abstractions)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -44,7 +45,7 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
 
 ## 4. Pipe events to numbers and maintain a running count using the scan operator
 
-[https://egghead.io/lessons/rxjs-break-down-a-requirement-into-small-problems](https://egghead.io/lessons/rxjs-break-down-a-requirement-into-small-problems)
+[https://egghead.io/lessons/rxjs-pipe-events-to-numbers-and-maintain-a-running-count-using-the-scan-operator](https://egghead.io/lessons/rxjs-pipe-events-to-numbers-and-maintain-a-running-count-using-the-scan-operator)
 
 [index.ts](src/04-pipe-events-to-numbers-and-maintain-a-running-count-using-the-scan-operator/streams/index.ts)
 
@@ -63,3 +64,22 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
       scan((acc, x) => acc + x, startingValue)
     )
     ```
+
+## 5. Create safe and predictable observable abstractions
+
+[https://egghead.io/lessons/rxjs-create-safe-and-predictable-observable-abstractions](https://egghead.io/lessons/rxjs-create-safe-and-predictable-observable-abstractions)
+
+[index.ts](src/05-create-safe-and-predictable-observable-abstractions/src/streams/index.ts)
+
+- it's important to consider who will be consuming a stream, and to provide the
+    consumer with predictable events and values
+- a stream that is composed of other streams won't necessarily emit an event
+    until the streams it is composed of emit values
+    - this means that there's no predictable value for that stream
+    - one way to improve the experience when consuming the stream is to force
+        the stream to emit an even using the `startWith` operator
+- `scan` doesn't require an initial value - if no initial value is provided, it
+    will use the first value of the stream as its starting value
+- to drop events from a stream that are repeated sequentially, we can use the
+    `didistinctUntilChanged` operator
+    - this is the same as `xstream`s `dropRepeats` operator
