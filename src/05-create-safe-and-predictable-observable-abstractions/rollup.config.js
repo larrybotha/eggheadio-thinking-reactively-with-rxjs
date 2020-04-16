@@ -23,7 +23,7 @@ export default {
       // we'll extract any component CSS out into
       // a separate file - better for performance
       css: css => {
-	css.write("public/build/bundle.css");
+        css.write("public/build/bundle.css");
       },
     }),
 
@@ -61,12 +61,12 @@ function serve() {
   return {
     writeBundle() {
       if (!started) {
-	started = true;
+        started = true;
 
-	require("child_process").spawn("npm", ["run", "start", "--", "--dev"], {
-	  stdio: ["ignore", "inherit", "inherit"],
-	  shell: true,
-	});
+        require("child_process").spawn("npm", ["run", "start", "--", "--dev"], {
+          stdio: ["ignore", "inherit", "inherit"],
+          shell: true,
+        });
       }
     },
   };
