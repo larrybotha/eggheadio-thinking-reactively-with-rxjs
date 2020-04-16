@@ -29,4 +29,8 @@ const activeTasksCount$ = taskIncDec$.pipe(
   scan((acc, incDec) => acc + incDec, 0)
 );
 
+/**
+ * This stream will not emit anything until one of the streams it is composed of
+ * emit a value.
+ */
 export { activeTasksCount$ };
