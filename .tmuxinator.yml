@@ -6,4 +6,5 @@ windows:
       layout: main-vertical
       panes:
         - vim
-        - cd project && npm run dev
+        -
+        -
