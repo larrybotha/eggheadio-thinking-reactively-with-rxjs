@@ -10,6 +10,7 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
 - [3. Break down a requirement into small problems](#3-break-down-a-requirement-into-small-problems)
 - [4. Pipe events to numbers and maintain a running count using the scan operator](#4-pipe-events-to-numbers-and-maintain-a-running-count-using-the-scan-operator)
 - [5. Create safe and predictable observable abstractions](#5-create-safe-and-predictable-observable-abstractions)
+- [06. Maintain shared observable state using the scan and shareReplay operators](#06-maintain-shared-observable-state-using-the-scan-and-sharereplay-operators)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -83,3 +84,9 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
 - to drop events from a stream that are repeated sequentially, we can use the
     `didistinctUntilChanged` operator
     - this is the same as `xstream`s `dropRepeats` operator
+
+## 06. Maintain shared observable state using the scan and shareReplay operators
+
+[https://egghead.io/lessons/rxjs-maintain-shared-observable-state-using-the-scan-and-sharereplay-operators](https://egghead.io/lessons/rxjs-maintain-shared-observable-state-using-the-scan-and-sharereplay-operators)
+
+[index.ts](src/06-maintain-shared-observable-state-using-the-scan-and-share-replay-operators/src/streams/index.ts)
