@@ -1,7 +1,5 @@
 <script type="typescript">
   import { activeTasksCount$ } from "./streams/index.ts";
-
-  export let name: string;
 </script>
 
 <style>
