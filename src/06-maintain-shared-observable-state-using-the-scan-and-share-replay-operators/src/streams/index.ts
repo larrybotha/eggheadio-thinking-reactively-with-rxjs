@@ -1,5 +1,11 @@
 import { Observable, merge } from "rxjs";
-import { mapTo, scan, startWith, distinctUntilChanged } from "rxjs/operators";
+import {
+  distinctUntilChanged,
+  mapTo,
+  scan,
+  shareReplay,
+  startWith,
+} from "rxjs/operators";
 
 const taskStart$ = new Observable();
 const taskCompleted$ = new Observable();
@@ -17,7 +23,8 @@ const activeTasksCount$ = taskIncDec$.pipe(
   scan((acc, incDec) => {
     return Math.max(0, acc + incDec);
   }),
-  distinctUntilChanged()
+  distinctUntilChanged(),
+  shareReplay({ bufferSize: 1, refCount: true })
 );
 
 export { activeTasksCount$ };
