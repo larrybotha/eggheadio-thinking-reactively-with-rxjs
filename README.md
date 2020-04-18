@@ -90,3 +90,45 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
 [https://egghead.io/lessons/rxjs-maintain-shared-observable-state-using-the-scan-and-sharereplay-operators](https://egghead.io/lessons/rxjs-maintain-shared-observable-state-using-the-scan-and-sharereplay-operators)
 
 [index.ts](src/06-maintain-shared-observable-state-using-the-scan-and-share-replay-operators/src/streams/index.ts)
+
+- one needs to determine whether a source stream is either transient, or a
+    single source of truth:
+
+    - *transient*: new subscribers to the stream will get their own events; they
+    don't need to receive previous events
+    - *single source of truth*: new subscribers need to get the same events that
+    previous subscribers received. An example of this would be watching
+    background tasks - if a subscriber needs the most recent background task
+    from a source, that source will need to be configured to be emit previous
+    events to that new subscriber
+- to make streams behave as a single source of truth, events need to be shared.
+    One way to do this is to use `RxJS`s `share` operator, which will emit
+    events to all subscribers with the same value
+    - one caveat here is that new subscribers will not receive an event until a
+        new event is emitted from the source. This can be problematic if the
+        subscriber needs a value on subscription
+- an alternative to `share` is `shareReplay`. `shareReplay` will emit the latest
+    `n` events to any new subscribers:
+
+    ```javascript
+    const replay$ = source$.pipe(shareReplay(1))
+    ```
+
+    - a caveat here is that if the `replay$`'s subscribers go to 0, it will not
+    complete. Any events it is receiving from its source will continue to be
+    emitted. Once the stream gets new subscribers, it will emit the latest
+    events from the events that were accumulating in the background. This may be
+    a source of memory leaks if the stream is not properly unsubscribed
+    - to address this, one should prefer providing a config to `shareReplay`,
+    setting `refCount` to `true` (`false` by default). `refCount: true`
+    instructs the stream to complete once its number of subscribers hits 0
+
+      ```javascript
+      const safeReplay$ = source$.pipe(
+        shareReplay({
+          // number of events to emit to new subscribers
+          bufferSize: 1,
+          refCount: true,
+        })
+      )
+      ```
