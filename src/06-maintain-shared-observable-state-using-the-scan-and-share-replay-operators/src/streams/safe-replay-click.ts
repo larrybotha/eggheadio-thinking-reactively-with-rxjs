@@ -19,7 +19,12 @@ const safeClickStreamFactory = (node: HTMLButtonElement) => {
    * events
    */
   const clickCount$ = click$.pipe(
-    shareReplay({ bufferSize: 1, refCount: true })
+    shareReplay({
+      // number of events to emit to new subscribers
+      bufferSize: 1,
+      // complete the stream when the number of subscribers reaches 0
+      refCount: true,
+    })
   );
 
   return clickCount$;
