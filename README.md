@@ -11,6 +11,7 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
 - [4. Pipe events to numbers and maintain a running count using the scan operator](#4-pipe-events-to-numbers-and-maintain-a-running-count-using-the-scan-operator)
 - [5. Create safe and predictable observable abstractions](#5-create-safe-and-predictable-observable-abstractions)
 - [06. Maintain shared observable state using the scan and shareReplay operators](#06-maintain-shared-observable-state-using-the-scan-and-sharereplay-operators)
+- [07. Use the filter and pairwise operators to determine when to show and hide the spinner](#07-use-the-filter-and-pairwise-operators-to-determine-when-to-show-and-hide-the-spinner)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -132,3 +133,12 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
         })
       )
       ```
+
+## 07. Use the filter and pairwise operators to determine when to show and hide the spinner
+
+[https://egghead.io/lessons/rxjs-use-the-filter-and-pairwise-operators-to-determine-when-to-show-and-hide-the-spinner](https://egghead.io/lessons/rxjs-use-the-filter-and-pairwise-operators-to-determine-when-to-show-and-hide-the-spinner)
+
+[index.ts](src/07-use-the-filter-and-pairwise-operators-to-determine-when-to-show-and-hide-the-spinner/src/streams/index.ts)
+
+- `pairwise` takes a source stream, and emits its last two events as a tuple
+- this is useful if we need to compare the current value with the previous value
