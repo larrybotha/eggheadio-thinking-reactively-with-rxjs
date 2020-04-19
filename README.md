@@ -13,6 +13,7 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
 - [06. Maintain shared observable state using the scan and shareReplay operators](#06-maintain-shared-observable-state-using-the-scan-and-sharereplay-operators)
 - [07. Use the filter and pairwise operators to determine when to show and hide the spinner](#07-use-the-filter-and-pairwise-operators-to-determine-when-to-show-and-hide-the-spinner)
 - [08. Build an observable from a simple english requirement](#08-build-an-observable-from-a-simple-english-requirement)
+- [09. Expose complex reactive code as simple function based APIs](#09-expose-complex-reactive-code-as-simple-function-based-apis)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -163,3 +164,15 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
     want to cancel previous subscriptions, and `mergeMap` should be used instead
     - any existing stream will be completed, and the new stream then observed
 - think _switch to a new observable_ when using this transformation
+
+## 09. Expose complex reactive code as simple function based APIs
+
+[https://egghead.io/lessons/rxjs-expose-complex-reactive-code-as-simple-function-based-apis](https://egghead.io/lessons/rxjs-expose-complex-reactive-code-as-simple-function-based-apis)
+
+[index.ts](src/09-expose-complex-reactive-code-as-simple-function-based-apis/src/streams/index.ts)
+
+- when watching for completion of long-running tasks, it's important to consider
+    that a task could be a function, a promise, or another observable
+- when watching for completion of a function, it may be required to use a helper
+    to indicate to a stream to explicitly emit a complete event
+- `timer` will emit a single event if only provided the `delay` parameter
