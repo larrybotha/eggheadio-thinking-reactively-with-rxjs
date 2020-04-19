@@ -140,5 +140,9 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
 
 [index.ts](src/07-use-the-filter-and-pairwise-operators-to-determine-when-to-show-and-hide-the-spinner/src/streams/index.ts)
 
+[fibonacci.ts](src/07-use-the-filter-and-pairwise-operators-to-determine-when-to-show-and-hide-the-spinner/src/streams/fibonacci.ts)
+
 - `pairwise` takes a source stream, and emits its last two events as a tuple
 - this is useful if we need to compare the current value with the previous value
+    - an example here may be recursive reducers, such as using `pairwise` and
+        `scan` to create a fibonacci sequence
