@@ -12,6 +12,7 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
 - [5. Create safe and predictable observable abstractions](#5-create-safe-and-predictable-observable-abstractions)
 - [06. Maintain shared observable state using the scan and shareReplay operators](#06-maintain-shared-observable-state-using-the-scan-and-sharereplay-operators)
 - [07. Use the filter and pairwise operators to determine when to show and hide the spinner](#07-use-the-filter-and-pairwise-operators-to-determine-when-to-show-and-hide-the-spinner)
+- [08. Build an observable from a simple english requirement](#08-build-an-observable-from-a-simple-english-requirement)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -146,3 +147,19 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
 - this is useful if we need to compare the current value with the previous value
     - an example here may be recursive reducers, such as using `pairwise` and
         `scan` to create a fibonacci sequence
+
+## 08. Build an observable from a simple english requirement
+
+[https://egghead.io/lessons/rxjs-build-an-observable-from-a-simple-english-requirement](https://egghead.io/lessons/rxjs-build-an-observable-from-a-simple-english-requirement)
+
+[index.ts](src/08-build-an-observable-from-a-simple-english-requirement/src/streams/index.ts)
+
+- `switchMap` switches the source stream to another stream; it is similar to
+    mapping over a stream, returning a stream from within that stream (a stream
+    of stream), and then flattening the stream
+- only one stream inside `switchMap` will be subscribed to at a time. This is
+    useful for cancelling streams, for example if multiple requests are made,
+    `switchMap` can be used to cancel prior subscriptions. Sometimes you may not
+    want to cancel previous subscriptions, and `mergeMap` should be used instead
+    - any existing stream will be completed, and the new stream then observed
+- think _switch to a new observable_ when using this transformation
