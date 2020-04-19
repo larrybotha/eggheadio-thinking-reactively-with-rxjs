@@ -175,4 +175,11 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
     that a task could be a function, a promise, or another observable
 - when watching for completion of a function, it may be required to use a helper
     to indicate to a stream to explicitly emit a complete event
+
+    - `Subject` allows one to do this. A `Subject` extends `Observable` by
+    allowing for events to be emitted using `mySyubject.next()`. It is both an
+    observer
+
+      - observer: can emit events using `next`
+      - observable: events can be subscribed to using `subscribe`
 - `timer` will emit a single event if only provided the `delay` parameter

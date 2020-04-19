@@ -12,6 +12,10 @@ import {
   takeUntil,
 } from "rxjs/operators";
 
+/**
+ * make taskStart$ and taskCompleted$ Subjects so that we can shamefully emit
+ * events
+ */
 const taskStart$ = new Subject();
 const taskCompleted$ = new Subject();
 const showLoader$ = new Observable();
