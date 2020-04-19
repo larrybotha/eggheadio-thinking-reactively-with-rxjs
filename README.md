@@ -15,6 +15,7 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
 - [08. Build an observable from a simple english requirement](#08-build-an-observable-from-a-simple-english-requirement)
 - [09. Expose complex reactive code as simple function based APIs](#09-expose-complex-reactive-code-as-simple-function-based-apis)
 - [10. Encapsulate complex imperative logic in a simple observable](#10-encapsulate-complex-imperative-logic-in-a-simple-observable)
+- [11. Extend Your Reactive Logic in RxJS using Observable-like Proxies that Delay or Drop Events](#11-extend-your-reactive-logic-in-rxjs-using-observable-like-proxies-that-delay-or-drop-events)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -217,4 +218,30 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
         })
       }
     })
+    ```
+
+## 11. Extend Your Reactive Logic in RxJS using Observable-like Proxies that Delay or Drop Events
+
+[https://egghead.io/lessons/rxjs-extend-your-reactive-logic-in-rxjs-using-observable-like-proxies-that-delay-or-drop-events](https://egghead.io/lessons/rxjs-extend-your-reactive-logic-in-rxjs-using-observable-like-proxies-that-delay-or-drop-events)
+
+[index.ts](src/11-extend-your-reactive-logic-using-observable-like-proxies-that-delay-or-drop-events/src/streams/index.ts)
+
+- we can delay the emitting of an event by using `switchMap` to return a new
+    `timer` stream with that delay
+- this allows us to do things such as delaying the showing of UI elements if
+    they are going to be displayed only for milliseconds, such as when a loader
+    is displayed for tasks that only take milliseconds
+- once the delay is over, consider how the switched stream will return control
+    to the original stream:
+
+    ```javascript
+    const delayedUIChange$ = task$.pipe(
+      /**
+       * Only emit an event after 300ms, and until events are completed
+       *
+       * If tasksAreDone$ emits before the 300ms, then no event will be emitted
+       * on this stream
+       */
+      switchMap(() => timer(300).pipe(takeUntil(tasksAreDone$)))
+    )
     ```
