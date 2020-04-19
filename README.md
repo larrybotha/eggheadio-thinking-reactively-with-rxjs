@@ -14,6 +14,7 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
 - [07. Use the filter and pairwise operators to determine when to show and hide the spinner](#07-use-the-filter-and-pairwise-operators-to-determine-when-to-show-and-hide-the-spinner)
 - [08. Build an observable from a simple english requirement](#08-build-an-observable-from-a-simple-english-requirement)
 - [09. Expose complex reactive code as simple function based APIs](#09-expose-complex-reactive-code-as-simple-function-based-apis)
+- [10. Encapsulate complex imperative logic in a simple observable](#10-encapsulate-complex-imperative-logic-in-a-simple-observable)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -182,4 +183,38 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
 
       - observer: can emit events using `next`
       - observable: events can be subscribed to using `subscribe`
+    - `Subject` is an event emitter
 - `timer` will emit a single event if only provided the `delay` parameter
+
+## 10. Encapsulate complex imperative logic in a simple observable
+
+[https://egghead.io/lessons/rxjs-encapsulate-complex-imperative-logic-in-a-simple-observable](https://egghead.io/lessons/rxjs-encapsulate-complex-imperative-logic-in-a-simple-observable)
+
+[index.ts](src/10-encapsulate-complex-imperitave-logic-in-a-simple-observable/src/streams/index.ts)
+
+- `Observable` can accept a function that is called every time the stream gets a
+    new subscriber
+- that function can return a teardown function when the stream completes
+- storing a reference to a promise allows one to reuse the resolved value:
+
+    ```javascript
+    const something$ = new Observable(() => {
+      // this code is executed each time the observable receives a new value
+
+      // store a reference to the promise for later use
+      const promise = somePromiseFactory();
+
+      // do something with the resolved value
+      promise.then(resolvedValue => {
+        resolvedValue.init();
+      })
+
+      // return a teardown function for observable completion
+      return () => {
+        // use the cached promise to get the resolved value again
+        promise.then(resolvedValue => {
+          resolvedValue.destroy();
+        })
+      }
+    })
+    ```
