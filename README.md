@@ -265,3 +265,8 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
     const c$ = combineLatest(a$, b$);
     ```
 - `combineLatest` emits a tuple of the latest events from each stream
+- the example in this demo is poignant; only hide a visible spinner when the
+    following conditions are met:
+
+    - there are no tasks, and
+    - at least 2 seconds have elapsed
