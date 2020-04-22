@@ -16,6 +16,7 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
 - [09. Expose complex reactive code as simple function based APIs](#09-expose-complex-reactive-code-as-simple-function-based-apis)
 - [10. Encapsulate complex imperative logic in a simple observable](#10-encapsulate-complex-imperative-logic-in-a-simple-observable)
 - [11. Extend Your Reactive Logic in RxJS using Observable-like Proxies that Delay or Drop Events](#11-extend-your-reactive-logic-in-rxjs-using-observable-like-proxies-that-delay-or-drop-events)
+- [12. Use RxJS combineLatest to Only Emit Notifications When Certain Events Have Happened](#12-use-rxjs-combinelatest-to-only-emit-notifications-when-certain-events-have-happened)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -245,3 +246,22 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
       switchMap(() => timer(300).pipe(takeUntil(tasksAreDone$)))
     )
     ```
+
+## 12. Use RxJS combineLatest to Only Emit Notifications When Certain Events Have Happened
+
+[https://egghead.io/lessons/rxjs-use-rxjs-combinelatest-to-only-emit-notifications-when-certain-events-have-happened](https://egghead.io/lessons/rxjs-use-rxjs-combinelatest-to-only-emit-notifications-when-certain-events-have-happened)
+
+[index.ts](src/12-use-rxjs-combinelatest-to-only-emit-notifications-when-certain-events-have-happened/src/streams/index.ts)
+
+- sometimes we need a stream to only emit events when to or more streams have
+    emitted, e.g. some event must be emitted when 2 or more conditions are met
+- to achieve this, we can use `combineLatest`:
+
+    ```javascript
+    const a$ = timer(2000);
+    const b$ = fromEvent('click', el)
+
+    // will only emit if 2 seconds have passed and the element is clicked
+    const c$ = combineLatest(a$, b$);
+    ```
+- `combineLatest` emits a tuple of the latest events from each stream
