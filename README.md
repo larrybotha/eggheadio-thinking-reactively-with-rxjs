@@ -17,6 +17,7 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
 - [10. Encapsulate complex imperative logic in a simple observable](#10-encapsulate-complex-imperative-logic-in-a-simple-observable)
 - [11. Extend Your Reactive Logic in RxJS using Observable-like Proxies that Delay or Drop Events](#11-extend-your-reactive-logic-in-rxjs-using-observable-like-proxies-that-delay-or-drop-events)
 - [12. Use RxJS combineLatest to Only Emit Notifications When Certain Events Have Happened](#12-use-rxjs-combinelatest-to-only-emit-notifications-when-certain-events-have-happened)
+- [13. Maintain Self-resetting State in Your Observable Streams using the RxJS scan Operator](#13-maintain-self-resetting-state-in-your-observable-streams-using-the-rxjs-scan-operator)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -270,3 +271,12 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
 
     - there are no tasks, and
     - at least 2 seconds have elapsed
+    tap(() => console.log("timer complete"))
+
+## 13. Maintain Self-resetting State in Your Observable Streams using the RxJS scan Operator
+
+[https://egghead.io/lessons/rxjs-maintain-self-resetting-state-in-your-observable-streams-using-the-rxjs-scan-operator](https://egghead.io/lessons/rxjs-maintain-self-resetting-state-in-your-observable-streams-using-the-rxjs-scan-operator)
+
+[index.ts](src/13-maintain-self-resetting-state-in-your-observable-streams-using-the-rxjs-scan-operator/src/streams/index.ts)
+
+-
