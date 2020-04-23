@@ -7,8 +7,8 @@ const initLoader = (
 
     res({
       show: () =>
-	(el.textContent = `loading ${(complete / total) *
-	  100}% (${complete}/${total})`),
+        (el.textContent = `loading ${(complete / total) *
+          100}% (${complete}/${total})`),
       hide: () => (el.textContent = ""),
     });
   });

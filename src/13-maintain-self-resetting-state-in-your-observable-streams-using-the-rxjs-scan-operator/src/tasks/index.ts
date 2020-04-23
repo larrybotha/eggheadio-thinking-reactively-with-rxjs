@@ -3,7 +3,7 @@ import { timer } from "rxjs";
 type Func = (...args: any[]) => any;
 
 const quickObservableTask$ = timer(200);
-const observableTask$ = timer(3000);
+const observableTask$ = timer(2200);
 
 const timeoutTask = (onStart: Func, onEnd: Func) => {
   onStart();

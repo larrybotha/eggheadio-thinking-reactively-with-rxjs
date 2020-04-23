@@ -32,7 +32,9 @@ const taskIncDec$ = merge(taskIncrement$, taskDecrement$);
 
 const activeTasksCount$ = taskIncDec$.pipe(
   startWith(0),
-  scan((acc, incDec) => Math.max(0, acc + incDec)),
+  scan((acc, incDec) => {
+    return Math.max(0, acc + incDec);
+  }),
   distinctUntilChanged(),
   shareReplay({ bufferSize: 1, refCount: true })
 );
@@ -40,16 +42,14 @@ const activeTasksCount$ = taskIncDec$.pipe(
 const loadStats$ = activeTasksCount$.pipe(
   scan(
     (acc, count) => {
-      const { prev, total, complete } = acc;
+      const { prev, complete } = acc;
       const removedTask = count < prev;
-      const addedTask = count > prev;
-
-      console.log(acc);
+      const currCompleted = removedTask ? complete + 1 : complete;
 
       return {
-	total: addedTask ? total + 1 : total,
-	complete: removedTask ? complete + 1 : complete,
-	prev: count,
+        total: currCompleted + count,
+        complete: currCompleted,
+        prev: count,
       };
     },
     { total: 0, complete: 0, prev: 0 }
@@ -58,7 +58,7 @@ const loadStats$ = activeTasksCount$.pipe(
 
 // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
-const loaderVisibleThreshold$ = timer(2000);
+const contentFlashThreshold$ = timer(2000);
 
 const someTasksActive$ = activeTasksCount$.pipe(
   pairwise(),
@@ -66,23 +66,21 @@ const someTasksActive$ = activeTasksCount$.pipe(
 );
 const allTasksCompleted$ = activeTasksCount$.pipe(filter(count => count === 0));
 
-const loaderHidden$ = combineLatest(
-  allTasksCompleted$,
-  loaderVisibleThreshold$
-);
+const loaderHidden$ = combineLatest(contentFlashThreshold$, allTasksCompleted$);
 
 const loaderVisible$ = someTasksActive$.pipe(
-  switchMap(() => loaderVisibleThreshold$.pipe(takeUntil(loaderHidden$)))
+  switchMap(() => contentFlashThreshold$.pipe(takeUntil(allTasksCompleted$)))
 );
 
 const loaderWithStats$ = loaderVisible$.pipe(
-  switchMap(() => loadStats$.pipe(takeUntil(loaderHidden$)))
+  switchMap(() => loadStats$.pipe(takeUntil(allTasksCompleted$)))
 );
 
 export {
   activeTasksCount$,
   loaderHidden$,
   loaderVisible$,
+  taskCompleted$,
   taskCompleted,
   loaderWithStats$,
   taskStarted,

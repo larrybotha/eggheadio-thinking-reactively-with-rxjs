@@ -1,7 +1,12 @@
 import { Observable } from "rxjs";
 import { switchMap, takeUntil } from "rxjs/operators";
 
-import { loaderHidden$, loaderVisible$, loaderWithStats$ } from "./index";
+import {
+  taskCompleted$,
+  loaderHidden$,
+  loaderVisible$,
+  loaderWithStats$,
+} from "./index";
 import { initLoader } from "../lib/loader";
 
 const showLoader$ = (total: number, completed: number) =>
@@ -14,7 +19,7 @@ const showLoader$ = (total: number, completed: number) =>
 
     return async () => {
       initLoaderPromise.then(loader => {
-	loader.hide();
+        loader.hide();
       });
     };
   });

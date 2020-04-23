@@ -24,7 +24,7 @@
      */
     quickObservableTask$.subscribe({
       complete: () => {
-	taskCompleted();
+        taskCompleted();
       }
     });
   }
@@ -37,7 +37,7 @@
      */
     observableTask$.subscribe({
       complete: () => {
-	taskCompleted();
+        taskCompleted();
       }
     });
   }
