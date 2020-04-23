@@ -18,6 +18,7 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
 - [11. Extend Your Reactive Logic in RxJS using Observable-like Proxies that Delay or Drop Events](#11-extend-your-reactive-logic-in-rxjs-using-observable-like-proxies-that-delay-or-drop-events)
 - [12. Use RxJS combineLatest to Only Emit Notifications When Certain Events Have Happened](#12-use-rxjs-combinelatest-to-only-emit-notifications-when-certain-events-have-happened)
 - [13. Maintain Self-resetting State in Your Observable Streams using the RxJS scan Operator](#13-maintain-self-resetting-state-in-your-observable-streams-using-the-rxjs-scan-operator)
+- [14. Build an Event Combo Observable with RxJS](#14-build-an-event-combo-observable-with-rxjs)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -279,4 +280,23 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
 
 [index.ts](src/13-maintain-self-resetting-state-in-your-observable-streams-using-the-rxjs-scan-operator/src/streams/index.ts)
 
--
+- `switchMap` only holds a single stream at a time - when that stream ends,
+    `switchMap` will exit, effectively resetting the stream contained in it
+- this is useful instead of manually resetting streams
+
+
+## 14. Build an Event Combo Observable with RxJS
+
+[https://egghead.io/lessons/rxjs-build-an-event-combo-observable-with-rxjs](https://egghead.io/lessons/rxjs-build-an-event-combo-observable-with-rxjs)
+
+[key-combo.ts](src/14-build-an-event-combo-observable-with-rxjs/src/streams/key-combo.ts)
+
+- `takeUntil` will allow a stream to continue emitting events as long as the
+    stream it contains doesn't end
+- `takeWhile` will keep a stream alive as long as the predicate function it
+    takes returns true:
+
+    ```javascript
+    interval(1000).pipe(takeWhile(x => x < 100))
+    ```
+- `skip` will drop values from a stream. This is the same as `drop` in `xstream`
