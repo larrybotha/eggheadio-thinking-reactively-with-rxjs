@@ -20,6 +20,7 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
 - [13. Maintain Self-resetting State in Your Observable Streams using the RxJS scan Operator](#13-maintain-self-resetting-state-in-your-observable-streams-using-the-rxjs-scan-operator)
 - [14. Build an Event Combo Observable with RxJS](#14-build-an-event-combo-observable-with-rxjs)
 - [15. Use RxJS exhaustMap to Wait for Open Combos to Finish Before Starting New Ones](#15-use-rxjs-exhaustmap-to-wait-for-open-combos-to-finish-before-starting-new-ones)
+- [16. Simplify Usage of Your Reactive Service by Building an RxJS Operator to Manage It For You](#16-simplify-usage-of-your-reactive-service-by-building-an-rxjs-operator-to-manage-it-for-you)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -312,3 +313,11 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
     emits
 - if we need the inner stream to continue emitting events, regardless of the
     outer stream's events, then we can use `exhaustMap`
+
+## 16. Simplify Usage of Your Reactive Service by Building an RxJS Operator to Manage It For You
+
+[https://egghead.io/lessons/rxjs-simplify-usage-of-your-reactive-service-by-building-an-rxjs-operator-to-manage-it-for-you](https://egghead.io/lessons/rxjs-simplify-usage-of-your-reactive-service-by-building-an-rxjs-operator-to-manage-it-for-you)
+
+[custom-operator.ts](src/16-simplify-usage-of-your-reactive-service-by-building-an-rxjs-operator-to-manage-it-for-you/src/streams/custom-operator.ts)
+
+-
