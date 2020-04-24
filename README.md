@@ -19,6 +19,7 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
 - [12. Use RxJS combineLatest to Only Emit Notifications When Certain Events Have Happened](#12-use-rxjs-combinelatest-to-only-emit-notifications-when-certain-events-have-happened)
 - [13. Maintain Self-resetting State in Your Observable Streams using the RxJS scan Operator](#13-maintain-self-resetting-state-in-your-observable-streams-using-the-rxjs-scan-operator)
 - [14. Build an Event Combo Observable with RxJS](#14-build-an-event-combo-observable-with-rxjs)
+- [15. Use RxJS exhaustMap to Wait for Open Combos to Finish Before Starting New Ones](#15-use-rxjs-exhaustmap-to-wait-for-open-combos-to-finish-before-starting-new-ones)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -300,3 +301,14 @@ Notes and annotations from Egghead's Thinking Reactively with RxJS course: https
     interval(1000).pipe(takeWhile(x => x < 100))
     ```
 - `skip` will drop values from a stream. This is the same as `drop` in `xstream`
+
+## 15. Use RxJS exhaustMap to Wait for Open Combos to Finish Before Starting New Ones
+
+[https://egghead.io/lessons/rxjs-use-rxjs-exhaustmap-to-wait-for-open-combos-to-finish-before-starting-new-ones](https://egghead.io/lessons/rxjs-use-rxjs-exhaustmap-to-wait-for-open-combos-to-finish-before-starting-new-ones)
+
+[key-combo.ts](src/15-use-rxjs-exhaustmap-to-wait-for-open-combos-to-finish-before-starting-new-ones/src/streams/key-combo.ts)
+
+- `switchMap` will dispose of its inner observable whenever the outer stream
+    emits
+- if we need the inner stream to continue emitting events, regardless of the
+    outer stream's events, then we can use `exhaustMap`
